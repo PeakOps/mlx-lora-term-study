@@ -14,6 +14,8 @@ target (≥ 2× the 12B system) was narrowly missed (1.9×).
 Treat these as preliminary results: one language pair, one domain, one machine, synthetic training
 and test data, and a very small human check.
 
+![Technical-term accuracy by system](figures/tacc.png)
+
 ---
 
 ## 1. Question
