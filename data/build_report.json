@@ -1,0 +1,16 @@
+{
+ "gorulmeyen_terim_icin_atilan_train_valid": 0,
+ "test_seen_atilan_8gram": 6,
+ "test_seen_atilan_jaccard": 3,
+ "test_unseen_atilan_8gram": 0,
+ "test_unseen_atilan_jaccard": 0,
+ "trap_atilan_8gram": 0,
+ "trap_atilan_jaccard": 0,
+ "n_train_term": 1500,
+ "n_valid_term": 150,
+ "n_test_seen": 200,
+ "n_test_unseen": 100,
+ "n_trap": 30,
+ "n_train_replay_src": 500,
+ "n_valid_replay_src": 50
+}
