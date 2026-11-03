@@ -272,4 +272,29 @@ FLORES-200 is licensed CC BY-SA 4.0, so it is not redistributed here.
 Code, synthetic data and results: Apache-2.0, Copyright 2026 PeakOps. The synthetic data was produced
 with a Gemma model; check the Gemma Terms of Use before using it to train other models.
 
+## L1b: exploratory follow-up (did not help)
+
+*Not pre-registered. Single seed. Decision rule fixed before the run.*
+
+H3 failed in en→tr (FLORES ΔCOMET L1 − B0 = −0.99 on average vs. a −0.5 threshold). Per-seed, the loss was uneven: s0 −1.80, s1 −0.63, s2 −0.54. We tested whether a larger replay share protects general en→tr quality.
+
+- **Change:** replay share 25% → 40% (1500 term pairs + 1000 replay; valid 150 + 100).
+  - No new data: the existing 500 generic replay sentences were added in the reverse direction as well.
+  - Targets are still B0 self-distillation.
+- **Fixed:** everything else matches the original runs (TranslateGemma 4B 8-bit, LoRA rank 8, LR 5e-5, 600 optimizer steps, best val-loss checkpoint), seed 0.
+- **Decision rule:** "promising" only if all four hold. Two did not.
+
+| Criterion | Threshold | Result | |
+|---|---|---|---|
+| FLORES en→tr ΔCOMET vs B0 | ≥ −0.5 | −1.05 [−1.62, −0.39] | ✗ |
+| term accuracy, seen terms | ≥ 92 | 97.6 | ✓ |
+| trap rate | ≤ B0 + 3 (B0 = 0) | 3.3 (1 of 30) | ✗ |
+| FLORES tr→en ΔCOMET vs B0 | ≥ −0.5 | +0.05 | ✓ |
+
+- **En→tr COMET:** 88.28, inside the original seed range (87.53 / 88.70 / 88.79; mean 88.34). The paired gain over the same seed (+0.75) is smaller than the seed spread (1.26), so it cannot be told apart from seed noise.
+- **Side effect:** unseen-term accuracy fell 3.6 points (p = 0.07), plausibly because the model sees ~20% fewer term examples at a fixed step count.
+- **Conclusion:** a higher replay share alone does not fix the en→tr quality drop. Further replay seeds were not run.
+- **Cost:** 64 min of training on the Mac mini (peak memory 6.2 GB).
+- All numbers were independently recomputed from raw outputs.
+
 Experiments were executed with AI coding agents under the author's design and review.
